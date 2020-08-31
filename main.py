@@ -6,7 +6,7 @@ from config_import import config_imports
 from colouring_algorithms import greedy_colouring, dsatur_colouring
 from random_graphs import random_graph, erdos_renyi
 from colouring_orders import random_ordering, degree_ordering
-from brute_force_colouring import (
+from brute_force_colourings import (
     product_brute_force_colouring,
     custom_brute_force_colouring
 )
