@@ -2,7 +2,7 @@
 A collection of programs to colour graphs in various ways, once or many times,
 to create random graphs and display a picture if run once (an example graph.png is included).
 
-Please check [License](https://github.com/TheCatSaber/Code-for-Intermediate-IRP-2020/#license)
+Please check [License](https://github.com/TheCatSaber/Code-for-Intermediate-IRP-2020/#license) for info on reuse.
 
 # How to run the code
 Install python 3.8 https://www.python.org/downloads/.
@@ -54,24 +54,27 @@ Valid: any float. If value <= 0, there will be no edges, and if >= 1, the graph 
 
 colouringToShow (default: None) - defines which colouring to show.
 None is no colouring, others are the colouring of the same name.
-Valid: None, randomGreedy, degreeGreedy, DSatur, productBruteForce, customBruteForce
+Valid: None, randomGreedy, degreeGreedy, DSatur, productBruteForce, customBruteForce.
 
-showLabels (default: True) - whether to show the labels on the output graph. Boolean.
+showLabels (default: True) - whether to show the labels on the output graph. Must be a boolean.
 
 useErdosRenyi (default: True) - whether to use Erdős-Rényi for random graph generation.
-If False, uses random_graphs() (designed by the progammer of these files). Boolean.
+If False, uses random_graphs() (designed by the progammer of these files). Must be a boolean.
 
 runBruteForce (default: True) - whether to run the brute force algorithms
-(useful to make False if you want to run with large graphs). Boolean
+(useful to make False if you want to run with large graphs). Must be a boolean.
 
 timesToRun (default: 1) - If 1, run the run_once() function
 (runs once and output includes a picture), if > 1,
-run each colouring that number of times, but no picture output. Must be integer > 0.
+run each colouring that number of times, but no picture output. Must be an integer > 0.
 
 # License
 
 The code ("This program") is available under 
 [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html).
+
+A copy is included
+[here](https://github.com/TheCatSaber/Figures-for-Intermediate-IRP-2020/blob/master/LICENSE).
  
 Copyright (C) 2020 TheCatSaber
 
