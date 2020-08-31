@@ -2,7 +2,7 @@
 A collection of programs to colour graphs in various ways, once or many times,
 to create random graphs and display a picture if run once (an example graph.png is included).
 
-Please check [License](https://github.com/TheCatSaber/Code-for-Intermediate-IRP-2020/#license) for info on reuse.
+Please check [License](https://github.com/TheCatSaber/Code-for-Intermediate-IRP-2020#license) for info on reuse.
 
 # How to run the code
 Install python 3.8 https://www.python.org/downloads/.
