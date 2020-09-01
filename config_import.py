@@ -132,19 +132,19 @@ def config_imports(
     try:
         with open("graphs.config", "r") as config_file:
             for line in config_file.readlines():
-                line_bits = line.strip().split(" ")
-                for config_thing in config_importer_list:
-                    if line_bits[0] == config_thing.name:
-                        config_thing.value = config_thing.run_validation(
-                            line_bits[1])
+                line_contents = line.strip().split(" ")
+                for config_importer in config_importer_list:
+                    if line_contents[0] == config_importer.name:
+                        config_importer.value = config_importer.run_validation(
+                            line_contents[1])
                         
     except FileNotFoundError:
         print("graphs.config not found. Using default values.")
     except Exception as e:
-        print(f"Another Exception was raised ({e})")
+        print(f"Another Exception was raised: ({e})")
     finally:
         config_file.close()
     
-    return_list = [config_thing.value for config_thing
+    return_list = [config_importer.value for config_importer
         in config_importer_list]
     return return_list
