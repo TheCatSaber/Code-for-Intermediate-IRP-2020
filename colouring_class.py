@@ -150,7 +150,7 @@ class ColouringRepeated(Colouring):
             self.order_text = " (including creating the orders)"
         
         print(f"The {times} {self.name_mid_sentence} colourings took " \
-              f"{self.total_time:.3f} seconds{self.order_text} " \
+              f"{self.total_time:.6f} seconds{self.order_text} " \
               f"and used {self.total_colours} colours.")
     
     def main_colouring_function(self, graph):
