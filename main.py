@@ -16,7 +16,6 @@
 
 #====Imports====#
 
-import time
 import gc
 from config_import import config_imports
 from colouring_algorithms import greedy_colouring, dsatur_colouring
