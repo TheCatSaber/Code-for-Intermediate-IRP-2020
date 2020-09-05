@@ -1,4 +1,4 @@
-"""Run the colourings according to graphs.config"""
+"""Run the colourings according to graphs.config."""
 # Copyright (C) 2020 TheCatSaber
 
 # This program is free software: you can redistribute it and/or modify
