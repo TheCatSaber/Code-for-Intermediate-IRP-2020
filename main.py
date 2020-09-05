@@ -16,6 +16,7 @@
 
 #====Imports====#
 
+import time
 import gc
 from config_import import config_imports
 from colouring_algorithms import greedy_colouring, dsatur_colouring
@@ -44,17 +45,21 @@ def run_once():
     global ERDOS_RENYI_P, COLOURING_TO_SHOW, SHOW_LABELS
     global RUN_BRUTE_FORCE, USE_ERDOS_RENYI
     
-    # Create graph.
+    # Create graph.  Time graph creation.
+    pre_graph_time = time.time()
     if USE_ERDOS_RENYI:
         G = erdos_renyi(GRAPH_SIZE, ERDOS_RENYI_P)
     else:
         G = random_graph(GRAPH_SIZE, RANDOM_GRAPH_EDGE_NUMBER)
+    post_graph_time = time.time()
+    graph_time = post_graph_time - pre_graph_time
 
     # Print information about the graph.
     print("Vertices:")
     print(G.nodes())
     print("Edges:")
     print(G.edges())
+    print(f"Creating the graph took {graph_time*1000:.3f} milliseconds.")
 
     # Instantiate instances of colouring_class.Colouring
     # for each colouring algorithm.
@@ -142,19 +147,26 @@ def run_many_times():
     # Disable garbage collection so better comparison
     # (like in the timeit module).
     gc.disable()
+    total_graph_time = 0
     for counter in range(TIMES_TO_RUN):
         
-        # Create graph.
+        # Create graph.  Time graph creation.
+        pre_graph_time = time.time()
         if USE_ERDOS_RENYI:
             G = erdos_renyi(GRAPH_SIZE, ERDOS_RENYI_P)
         else:
-            G = random_graph(
-                GRAPH_SIZE, RANDOM_GRAPH_EDGE_NUMBER)
+            G = random_graph(GRAPH_SIZE, RANDOM_GRAPH_EDGE_NUMBER)
+        post_graph_time = time.time()
+        total_graph_time += post_graph_time - pre_graph_time
         
         # Run each colouring on G.
         for object_ in colouring_class.colouring_object_list:
             object_.main_colouring_function(G)
     gc.enable()
+    # Print out info about graph creation times,
+    # and running times and colours.
+    print(f"The {TIMES_TO_RUN} graph creations " \
+          f"took {total_graph_time:.6f} seconds.")
     for colouring_object in colouring_class.colouring_object_list:
         colouring_object.print_information(TIMES_TO_RUN)
         
