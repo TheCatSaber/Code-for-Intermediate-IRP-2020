@@ -97,19 +97,17 @@ def create_options(colours, size):
     
     colours -- number of colours being tested.
     size -- size of graph being tested."""
-    # colours_options are those with only colours numbers in them,
-    # rather than having more that they would have had
-    # if colours was bigger.
-    colours_options = size - colours
-    options_0 = [colours] * colours_options
+    # Counts up from 1 to colours.
+    options_0 = [counter for counter in range(1, colours+1)]
     
-    #Counts down from colours to 1
-    options_1 = [colours-counter for counter in range(colours)]
+    # The rest of the list has the value colours.
+    # The length of the returned list needs to be size
+    # and a vertex can't have more options than the number 
+    # of colours being tested.
+    options_1 = [colours] * (size - len(options_0))
     
-    # Reverse to suit explanation
-    # full_options exists as .reverse() works in place and returns None.
+    # Combine and return.
     full_options = options_0 + options_1
-    full_options.reverse()
     return full_options
     
     
