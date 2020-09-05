@@ -106,7 +106,11 @@ def run_once():
               "Using no colouring in output.")
 
     # Create and display output picture.
-    output_graph(G, output_colouring, SHOW_LABELS)
+    # Try, except since errors can occur with large graphs.
+    try:
+        output_graph(G, output_colouring, SHOW_LABELS)
+    except Exception as e:
+        print(f"There was an exception in making the output graph (e).")
 
 
 colouring_repeated_objects_list = []
