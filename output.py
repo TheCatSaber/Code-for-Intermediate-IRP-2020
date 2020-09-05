@@ -41,19 +41,19 @@ def numerical_colouring_to_actual_colours(colouring):
     return output_colouring
 
 
-def output_graph(graph, colouring, show_labels):
-    """Output graph coloured with colouring and saves as graph.png.
+def output_graph(G, colouring, show_labels):
+    """Output G coloured with colouring and saves as graph.png.
     
-    graph -- graph to be output.
+    G -- graph to be output.
     colouring -- colouring to be output.
     show_labels -- boolean whether to show the labels on the output."""
     # Labels for the nodes
-    labels = {vertex: vertex for vertex in graph}
+    labels = {vertex: vertex for vertex in G}
     
     # Colouring is None -> no output colouring
     if colouring == None:
         nx.draw_networkx(
-            graph, with_labels=show_labels, node_color="lightblue",
+            G, with_labels=show_labels, node_color="lightblue",
             linewidths=1.75, edgecolors="black", width=1.5, labels=labels,
             font_color="black")
     else:
@@ -66,17 +66,17 @@ def output_graph(graph, colouring, show_labels):
                   "Displaying with no colouring.")
 
             # Call this function with None as colouring
-            output_graph(graph, None, show_labels)
+            output_graph(G, None, show_labels)
         except:
             print("Unexpected error in displaying colouring with colours, " \
                   "not using colours. " \
                   "Please make an issue on the GitHub page.")
 
             # Call this function with None as colouring
-            output_graph(graph, None, show_labels)
+            output_graph(G, None, show_labels)
 
         nx.draw_networkx(
-            graph, with_labels=show_labels, node_color=colours_colouring,
+            G, with_labels=show_labels, node_color=colours_colouring,
             linewidths=1.75, edgecolors="black", width=1.5, labels=labels,
             font_color="black")
     

@@ -21,11 +21,11 @@ import random
 
 #====Helper Functions====#
 
-def vertex_degrees(graph):
-    """Return a dict in the form vertex: degree for graph."""
+def vertex_degrees(G):
+    """Return a dict in the form vertex: degree for G."""
     vertex_degree_dict = {}
-    for vertex in graph:
-        vertex_degree_dict[vertex] = len(graph[vertex])
+    for vertex in G:
+        vertex_degree_dict[vertex] = len(G[vertex])
     return vertex_degree_dict
 
 
@@ -38,19 +38,20 @@ def order_dict_return_list_reversed(dictionary):
 
 
 #====Functions====#
-def random_ordering(graph):
-    """Create random shuffling of the vertices of graph."""
-    vertices = list(graph)
+def random_ordering(G):
+    """Create random shuffling of the vertices of G."""
+    vertices = list(G)
     random.shuffle(vertices)
     return vertices
 
-def degree_ordering(graph):
-    """Make ordering for greedy_colouring for graph.
+def degree_ordering(G):
+    """Make ordering for greedy_colouring for G.
+    
     This order has the highest degree vertex first, then the
     second highest degree vertex and so on.
     If there is a tie, it is done alphabetically.
     """
-    vertex_degree_dict = vertex_degrees(graph)
+    vertex_degree_dict = vertex_degrees(G)
     ordered_vertex_degrees = order_dict_return_list_reversed(
         vertex_degree_dict)
     return ordered_vertex_degrees

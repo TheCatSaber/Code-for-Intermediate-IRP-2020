@@ -45,17 +45,17 @@ def run_once():
     global ERDOS_RENYI_P, COLOURING_TO_SHOW, SHOW_LABELS
     global RUN_BRUTE_FORCE, USE_ERDOS_RENYI
     
-    # Create the graph, using the specified method and parameters.
+    # Create graph.
     if USE_ERDOS_RENYI:
-        graph = erdos_renyi(GRAPH_SIZE, ERDOS_RENYI_P)
+        G = erdos_renyi(GRAPH_SIZE, ERDOS_RENYI_P)
     else:
-        graph = random_graph(GRAPH_SIZE, RANDOM_GRAPH_EDGE_NUMBER)
+        G = random_graph(GRAPH_SIZE, RANDOM_GRAPH_EDGE_NUMBER)
 
     # Print information about the graph.
     print("Vertices:")
-    print(graph.nodes())
+    print(G.nodes())
     print("Edges:")
-    print(graph.edges())
+    print(G.edges())
 
     # Instantiate instances of colouring_class.Colouring
     # for each colouring algorithm.
@@ -87,10 +87,10 @@ def run_once():
     # if COLOURING_TO_SHOW from graphs.config is invalid.
     output_colouring = None
 
-    # Run each colouring on the graph and print out
+    # Run each colouring on G and print out
     # the information about it.
     for colouring in colouring_class.colouring_object_list:
-        colouring.main_colouring_function(graph)
+        colouring.main_colouring_function(G)
         
         # Assign the desired colouring to output_colouring.
         if colouring.config_name == COLOURING_TO_SHOW:
@@ -102,7 +102,7 @@ def run_once():
               "Using no colouring in output.")
 
     # Create and display output picture.
-    output_graph(graph, output_colouring, SHOW_LABELS)
+    output_graph(G, output_colouring, SHOW_LABELS)
 
 
 colouring_repeated_objects_list = []
@@ -147,16 +147,17 @@ def run_many_times():
         
         # Create graph.
         if USE_ERDOS_RENYI:
-            graph = erdos_renyi(GRAPH_SIZE, ERDOS_RENYI_P)
+            G = erdos_renyi(GRAPH_SIZE, ERDOS_RENYI_P)
         else:
-            graph = random_graph(
+            G = random_graph(
                 GRAPH_SIZE, RANDOM_GRAPH_EDGE_NUMBER)
-        # Run each colouring on the graph.
+        
+        # Run each colouring on G.
         for object_ in colouring_class.colouring_object_list:
-            object_.main_colouring_function(graph)
+            object_.main_colouring_function(G)
     gc.enable()
-    for object_ in colouring_class.colouring_object_list:
-        object_.print_information(TIMES_TO_RUN)
+    for colouring_object in colouring_class.colouring_object_list:
+        colouring_object.print_information(TIMES_TO_RUN)
         
 
 if __name__ == "__main__":
