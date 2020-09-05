@@ -26,7 +26,7 @@ random_greedy: greedy colouring with a random order.
 degree_greedy: greedy colouring with the highest degree vertex first,
 then second highest degree and so on.
 
-dsautr: DSatur colouring.
+dsatur: DSatur colouring.
 
 product_brute_force: brute force algorithm using itertools.product.
 
