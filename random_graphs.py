@@ -28,7 +28,7 @@ def init_graph(size):
     G = nx.Graph()
     # The ASCII reprensentation of 'A' is 65, 'B' is 66 etc.
     G.add_nodes_from([chr(i) for i in range(65, 65+size)])
-    return graph
+    return G
 
 
 #====Random Graph Functions====#
