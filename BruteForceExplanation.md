@@ -16,7 +16,7 @@ def colouring_list_to_dict(colouring_list, vertices):
 Return True if `colouring` is a valid colouring of G, False otherwise.
 
 For edge, edge[0] is the start vertex, edge[1] is the end vertex.
-Thus if they share a colour, it is an invalid colourings.
+Thus if they share a colour, it is an invalid colouring.
 
 ```
 def validate_colouring(G, colouring):
