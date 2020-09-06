@@ -71,8 +71,8 @@ def product_brute_force_colouring(G):
         # Gives possible colourings for current amount of colours.
         # E.g. for 2 colours and 3 nodes, will give
         # 000, 001, 010, 011, 100, 101, 110, 111.
-        options = product([i for i in range(colours)], repeat=size)
-        for colouring_option in options:
+        colourings = product([i for i in range(colours)], repeat=size)
+        for colouring_option in colourings:
             # Prevent repeats of colourings already checked
             # by checking if the highest possible colour is in
             # colouring_option which is colours - 1.
