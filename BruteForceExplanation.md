@@ -1,5 +1,11 @@
 # This file explains how both brute force methods work.
 
+[Shared functions](#shared-functions-explanation)
+
+[Product Brute Force](#product_brute_force_colouringg)
+
+[Custom Brute Force](#custom_brute_force_colouringg)
+
 # Shared functions explanation
 
 ## `colouring_list_to_dict(colouring_list, vertices)`
