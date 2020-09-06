@@ -177,7 +177,7 @@ def custom_brute_force_colouring(G):
             # The colouring will never require more
             # colours than there are vertices in G
             # Thus an error has occurred.
-            print("No custom brut force colouring found. " \
+            print("No custom brute force colouring found. " \
                   "Please make an issue on GitHub.")
             return None
         
