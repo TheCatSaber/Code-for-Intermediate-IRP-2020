@@ -134,7 +134,7 @@ def colouring_generator(colouring_index, options):
     return colouring_list
     
 
-def check_all_colours_in_colouring_list(colours, colouring_list):
+def check_colours_items_in_colouring_list(colours, colouring_list):
     """Return True if they are colours unique items in colouring_list.
     
     colours -- the number of items.
@@ -195,7 +195,7 @@ def custom_brute_force_colouring(G):
             
             # Prevent repeats of colourings already checked
             # by checking if all possible colours are in the colouring.
-            if check_all_colours_in_colouring_list(colours, colouring_list):
+            if check_colours_items_in_colouring_list(colours, colouring_list):
                 
                 # Convert the list to a dict
                 colouring = colouring_list_to_dict(colouring_list, vertices)
