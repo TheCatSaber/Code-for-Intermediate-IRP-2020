@@ -41,7 +41,7 @@ def validate_colouring(G, colouring):
 
 
 def colouring_list_to_dict(colouring_list, vertices):
-    """Converts colouring_list and vertices
+    """Convert colouring_list and vertices
     to a dict in the form vertex: colour.
     """
     colouring = {vertices[counter]: colouring_list[counter] \
