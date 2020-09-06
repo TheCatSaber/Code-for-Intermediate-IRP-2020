@@ -29,7 +29,7 @@ from itertools import product
 #====Shared Functions====#
 
 def validate_colouring(G, colouring):
-    """Check if colouring is a valid colouring of G. Return bool."""
+    """Return True if colouring is a valid colouring of G, False otherwise."""
     for edge in G.edges():
         # edge[0] is the start vertex, edge[1] is the end vertex.
         # If the colours at the start and end of edge each are the same,
@@ -41,8 +41,8 @@ def validate_colouring(G, colouring):
 
 
 def colouring_list_to_dict(colouring_list, vertices):
-    """Convert colouring_list and vertices
-    to a dict in the form vertex: colour.
+    """Turn a list of colours (colouring_list) and a list of vertices
+    (vertices) into a dictionary in the form vertex: colour.
     """
     colouring = {vertices[counter]: colouring_list[counter] \
         for counter in range(len(colouring_list))}
