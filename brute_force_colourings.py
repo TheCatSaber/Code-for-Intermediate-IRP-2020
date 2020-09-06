@@ -141,7 +141,6 @@ def check_all_colours_in_colouring_list(colours, colouring_list):
     colouring_list -- the list that needs to be checked it has enough
     unique items in.
     """
-    values = set(colouring_list)
     if len(set(colouring_list)) == colours:
         return True
     return False
