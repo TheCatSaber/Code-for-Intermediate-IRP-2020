@@ -1,10 +1,7 @@
 """2 brute force methods for optimal colouring of input graph.
 
-product_brute_force_colouring uses itertools.product.
-custom_brute_force_colouring uses a custom one, explained in detail __.
-In summary, it counts in a variable base system,
-but only tests if it is a valid colouring if it uses all the colours
-from 1 to the number of colours being tested to prevent repeats.
+For an explanation of how these work, see
+https://github.com/TheCatSaber/Code-for-Intermediate-IRP-2020/blob/master/BruteForceExplanation.md
 """
 # Copyright (C) 2020 TheCatSaber
 
