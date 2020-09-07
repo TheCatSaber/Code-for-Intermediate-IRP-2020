@@ -143,7 +143,10 @@ def config_imports(
     except Exception as e:
         print(f"Another Exception was raised: ({e})")
     finally:
-        config_file.close()
+        try:
+            config_file.close()
+        except:
+            pass
     
     return_list = [config_importer.value for config_importer
         in config_importer_list]
