@@ -49,7 +49,7 @@ def random_graph(size, edge_number):
         for counter in range(edge_number):
             # Choose a random vertex.
             vertex_choice = random.choice(vertices)
-            if vertex_choice != vertex and vertex_choice not in G[vertex]:
+            if vertex_choice != vertex:
                 G.add_edge(vertex, vertex_choice)
     return G
 
