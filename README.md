@@ -31,13 +31,8 @@ dsatur: DSatur colouring.
 product_brute_force: brute force algorithm using itertools.product.
 
 custom_brute_force: brute force algorithm designed by TheCatSaber.
-The first vertex is always assigned the colour 0,
-the second vertex the colours 0 or 1,
-the third vertex the colours 0, 1 or 2 and so on.
-However, the vertices have a maximum number of options of colours
-(the number of colours currently being tested).
-Colourings are only checked if they contain all the colours
-from 0 to colours-1 (i.e. they have colours unique items).
+For an explantion of both brute forces see
+[BruteForceExplanation.md](https://github.com/TheCatSaber/Code-for-Intermediate-IRP-2020/blob/master/BruteForceExplanation.md)
 
 # graphs.config file
 
@@ -108,5 +103,3 @@ https://matplotlib.org/
 https://networkx.github.io/documentation/latest/ 
 
 https://docs.python.org/
-
-
