@@ -113,8 +113,6 @@ def run_once():
         print(f"There was an exception in making the output graph (e).")
 
 
-colouring_repeated_objects_list = []
-
 def run_many_times():
     """Run the colourings many times."""
     
