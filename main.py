@@ -20,6 +20,7 @@ import time
 import gc
 from config_import import config_imports
 from colouring_algorithms import greedy_colouring, dsatur_colouring
+from iterated_greedy import iterated_greedy_colouring
 from random_graphs import random_graph, erdos_renyi
 from colouring_orders import random_ordering, degree_ordering
 from brute_force_colourings import (
@@ -44,6 +45,7 @@ def run_once():
     global GRAPH_SIZE, RANDOM_GRAPH_EDGE_NUMBER
     global ERDOS_RENYI_P, COLOURING_TO_SHOW, SHOW_LABELS
     global RUN_BRUTE_FORCE, USE_ERDOS_RENYI
+    global IG_INITAL, IG_LIMIT, IG_GOAL_K, IG_RATIOS
     
     # Create graph.  Time graph creation.
     pre_graph_time = time.time()
@@ -75,6 +77,14 @@ def run_once():
     dsatur = colouring_class.Colouring(
         "DSatur", dsatur_colouring, "DSatur",
         preserve_capitalisation=True)
+    
+    ig_initial = degree_greedy
+    
+    iterated_greedy = colouring_class.Colouring(
+        "Iterated greedy", iterated_greedy_colouring, "iteratedGreedy",
+        ig=True,
+        ig_initial=ig_initial, ig_limit=IG_LIMIT, ig_goal_k=IG_GOAL_K,
+        ig_ratios=IG_RATIOS)
     
     if RUN_BRUTE_FORCE:
         product_brute_force = colouring_class.Colouring(
@@ -110,7 +120,7 @@ def run_once():
     try:
         output_graph(G, output_colouring, SHOW_LABELS)
     except Exception as e:
-        print(f"There was an exception in making the output graph (e).")
+        print(f"There was an exception in making the output graph ({e}).")
 
 
 def run_many_times():
@@ -122,6 +132,7 @@ def run_many_times():
     global GRAPH_SIZE, RANDOM_GRAPH_EDGE_NUMBER
     global ERDOS_RENYI_P, USE_ERDOS_RENYI
     global RUN_BRUTE_FORCE, TIMES_TO_RUN
+    global IG_INITAL, IG_LIMIT, IG_GOAL_K, IG_RATIOS
     
     random_greedy = colouring_class.ColouringRepeated(
         "Random greedy", greedy_colouring, "randomGreedy",
@@ -134,6 +145,14 @@ def run_many_times():
     dsatur = colouring_class.ColouringRepeated(
         "DSatur", dsatur_colouring, "DSatur",
         preserve_capitalisation=True)
+
+    ig_initial = degree_greedy
+
+    iterated_greedy = colouring_class.ColouringRepeated(
+        "Iterated greedy", iterated_greedy_colouring, "iteratedGreedy",
+        ig=True,
+        ig_initial=ig_initial, ig_limit=IG_LIMIT, ig_goal_k=IG_GOAL_K,
+        ig_ratios=IG_RATIOS)
 
     if RUN_BRUTE_FORCE:
         product_brute_force = colouring_class.ColouringRepeated(
@@ -184,6 +203,17 @@ if __name__ == "__main__":
     USE_ERDOS_RENYI = True
     RUN_BRUTE_FORCE = True
     TIMES_TO_RUN = 1
+    IG_INITAL = "degree_greedy"
+    IG_LIMIT = 100
+    IG_GOAL_K = 1
+    IG_RATIOS = {
+        "reverse": 50,
+        "random": 30,
+        "largest": 50,
+        "smallest": 0,
+        "increasing": 0,
+        "decreasing": 0
+    }
     
     # Perform import.
     (
@@ -195,6 +225,10 @@ if __name__ == "__main__":
         USE_ERDOS_RENYI,
         RUN_BRUTE_FORCE,
         TIMES_TO_RUN,
+        IG_INITAL,
+        IG_LIMIT,
+        IG_GOAL_K,
+        IG_RATIOS,
     ) = config_imports(
         GRAPH_SIZE,
         RANDOM_GRAPH_EDGE_NUMBER,
@@ -204,6 +238,10 @@ if __name__ == "__main__":
         USE_ERDOS_RENYI,
         RUN_BRUTE_FORCE,
         TIMES_TO_RUN,
+        IG_INITAL,
+        IG_LIMIT,
+        IG_GOAL_K,
+        IG_RATIOS,
     )
         
     if TIMES_TO_RUN == 1:

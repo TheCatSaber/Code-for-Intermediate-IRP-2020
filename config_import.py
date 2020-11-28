@@ -27,7 +27,7 @@ def int_value_above_zero(name, value, default):
     
     name -- name for error message.
     value -- value.
-    default -- default (should be a positive integer).
+    default -- default (positive integer).
     """
     if value.isdigit():
         if int(value) > 0:
@@ -43,7 +43,7 @@ def float_value(name, value, default):
     
     name -- name for error message.
     value -- value.
-    default -- default (should be a float).
+    default -- default (float).
     """
     if value.replace(".","").isdigit():
         return float(value)
@@ -56,7 +56,7 @@ def bool_value(name, value, default):
     
     name -- name for error message.
     value -- value.
-    default -- default (should be a boolean).
+    default -- default (boolean).
     """
     if value.lower() == "true":
         return True
@@ -65,17 +65,77 @@ def bool_value(name, value, default):
     print(f"{name} needs to be an bool, using default {default}.")
     return default
     
-def string_value_or_none(name, value, deault):
+def string_value_or_none(name, value, default):
     """If value.lower() is "none", return None,
     else return the string of value.
     
     The arguement default is included to be consistent with
     the other value functions in this file.
+    name -- name for error message.
+    value -- value.
+    default -- default (string or None).
     """
     if value.lower() == "none":
         return None
     return str(value)
 
+def string_value(name, value, default):
+    """Return string of value.
+    
+    The arguement default is included to be consistent with
+    the other value functions in this file.
+    name -- name for error message.
+    value -- value.
+    default -- default (string).
+    """
+    return str(value)
+
+def ratios_int_zero_or_above(name, value, default):
+    """Return dict of keys of default matched with values from value,
+    only when the value is an int with value zero or above.
+    
+    If not same length, go through value as far as possible,
+    and rest of default stays the same, or extra values are discarded
+    
+    name -- name for error message.
+    value -- value in form a,b,c,d,e,f,g....
+    default -- default (dict with same length as value).
+    """
+    return_dict = {}
+    
+    keys = list(default.keys())
+    default_values = list(default.values())
+    values = value.split(",")
+    
+    wrong = False
+    
+    for counter in range(len(default)):
+        try:
+            value = int(values[counter])
+            if value < 0:
+                value = default_values[counter]
+                print(f"The {counter+1} value in {name.lower()} " \
+                      f"needs to be positive or 0, using default {value}.")
+        except ValueError:
+            value = default_values[counter]
+            print(f"The {counter+1} value in {name.lower()} " \
+                  f"needs to be an integer, using default {value}.")
+        except IndexError:
+            value = default_values[counter]
+            print(f"The {counter+1} value in {name.lower()} " \
+                  f"was not defined, using default {value}.")
+        except:
+            value = default_values[counter]
+            print(f"The {counter+1} value in {name.lower()} " \
+                  f"experienced an unexpected error, using default {value}.")
+        
+        return_dict[keys[counter]] = value
+    
+    if len(values) > len(keys):
+        print(f"Too many values provided for {name.lower()}, " \
+               "discarding unused ones.")
+    
+    return return_dict
 
 #====Class====#
 
@@ -89,7 +149,7 @@ class ConfigImporter:
         the form mixedCase.
         default -- value to be returned if invalid config.
         validation -- validation function for import from this page
-        (with arguements in the form (name, value, defualt)).
+        (with arguements in the form (name, value, default)).
         """
         self.name = name
         self.default = default
@@ -108,7 +168,8 @@ class ConfigImporter:
 def config_imports(
         GRAPH_SIZE, RANDOM_GRAPH_EDGE_NUMBER, ERDOS_RENYI_P,
         COLOURING_TO_SHOW, SHOW_LABELS, USE_ERDOS_RENYI,
-        RUN_BRUTE_FORCE, TIMES_TO_RUN):
+        RUN_BRUTE_FORCE, TIMES_TO_RUN, IG_INITIAL,
+        IG_LIMIT, IG_GOAL_K, IG_RATIOS):
     """Run config imports.
     
     Arguements are the default values to be returned if not set
@@ -129,6 +190,14 @@ def config_imports(
         "runBruteForce", RUN_BRUTE_FORCE, bool_value)
     times_to_run = ConfigImporter(
         "timesToRun", TIMES_TO_RUN, int_value_above_zero)
+    ig_inital = ConfigImporter(
+        "IGInitial", IG_INITIAL, string_value)
+    ig_limit = ConfigImporter(
+        "IGLimit", IG_LIMIT, int_value_above_zero)
+    ig_goal_k = ConfigImporter(
+        "IGGoalK", IG_GOAL_K, int_value_above_zero)
+    ig_ratios = ConfigImporter(
+        "IGRatios", IG_RATIOS, ratios_int_zero_or_above)
     try:
         with open("graphs.config", "r") as config_file:
             for line in config_file.readlines():

@@ -16,7 +16,7 @@
 
 #====Imports====#
 
-from colouring_orders import degree_ordering, order_dict_return_list_reversed
+from colouring_orders import degree_ordering, order_dict_return_list
 
 
 #====Helper Functions====#
@@ -63,7 +63,7 @@ def saturation_degree_ordering(G, colouring):
         if vertex not in colouring}
     # Convert to a list of the vertices, ordered in reverse by
     # the degree of saturation.
-    sorted_ordering = order_dict_return_list_reversed(saturation_degree_dict)
+    sorted_ordering = order_dict_return_list(saturation_degree_dict, reverse=True)
     return sorted_ordering
 
 
@@ -76,6 +76,8 @@ def greedy_colouring(G, order):
     neighbours to that vertex.
     Based on https://en.wikipedia.org/wiki/Greedy_coloring#Algorithm.
     """
+    if order == None:
+        return None
     colouring = {}
     for vertex in order:
         # Colour is the smallest colour not in the neighbours' colours.

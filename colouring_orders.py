@@ -28,14 +28,16 @@ def vertex_degrees(G):
         vertex_degree_dict[vertex] = len(G[vertex])
     return vertex_degree_dict
 
-
-def order_dict_return_list_reversed(dictionary):
-    """Return list of keys of dictionary, reversed,
-    based on the value.
+def order_dict_return_list(dictionary, reverse=False):
+    """Return list of keys of dictionary,
+    ordered on the value.
+    
+    dictionary -- dictionary to perform this to.
+    reverse -- Whether to reverse the list. Value of reverse arguement
+    in sorted().
     """
     return [key for key, value in sorted(dictionary.items(),
-            key=lambda item: item[1], reverse=True)]
-
+            key=lambda item: item[1], reverse=reverse)]
 
 #====Functions====#
 def random_ordering(G):
@@ -52,6 +54,6 @@ def degree_ordering(G):
     If there is a tie, it is done alphabetically.
     """
     vertex_degree_dict = vertex_degrees(G)
-    ordered_vertex_degrees = order_dict_return_list_reversed(
-        vertex_degree_dict)
+    ordered_vertex_degrees = order_dict_return_list(
+        vertex_degree_dict, reverse=True)
     return ordered_vertex_degrees

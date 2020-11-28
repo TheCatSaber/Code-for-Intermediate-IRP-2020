@@ -32,14 +32,17 @@ class Colouring:
     
     def __init__(self, name, colouring_function, config_name,
                  order_required=False, order_function=None,
-                 preserve_capitalisation=False):
+                 preserve_capitalisation=False,
+                 ig=False, ig_initial=None, ig_limit=None,
+                 ig_goal_k=None, ig_ratios=None):
         """A class to run multiple different colourings, once.
         Call main_colouring_function with the graph you want to
         colour.
         
         name -- name.
-        colouring-function -- the colouring function to call.
-        Either with arguments (G) or (G, order)
+        colouring_function -- the colouring function to call.
+        Either with arguments (G) or (G, order) or (G, inital_ordering,
+        limit, goal_k, ratios)
         config_name -- string used in graphs.config to specify
         which colouring should be displayed in the output.
         order_required -- True means the colouring function
@@ -48,6 +51,14 @@ class Colouring:
         preverse_capitalisation -- True keeps capitalisation of
         name the same for all output strings, otherwise follows
         normal capitalisation rules.
+        ig -- whether the colouring is an iterated greedy.
+        Iterated Greedy arguments are in the form ig_.
+        ig_initial -- inital colouring to run for IG (either an object
+        of the class Colouring or of the class of a child of Colouring)
+        .
+        ig_limit -- limit for IG.
+        ig_goal_k -- goal_k for IG.
+        ig_ratios -- ratios for IG.
         """
         self.name = name
         if preserve_capitalisation:
@@ -61,6 +72,11 @@ class Colouring:
         self.order_required = order_required
         self.order_function = order_function
         colouring_object_list.append(self)
+        self.ig = ig
+        self.ig_initial = ig_initial
+        self.ig_limit = ig_limit
+        self.ig_goal_k = ig_goal_k
+        self.ig_ratios = ig_ratios
     
     def run_colouring(self, G):
         """Run self.colouring_function on G,
@@ -70,6 +86,10 @@ class Colouring:
         if self.order_required:
             self.order = self.order_function(G)
             self.colouring = self.colouring_function(G, self.order)
+        elif self.ig:
+            self.colouring = self.colouring_function(
+                G, self.ig_initial, self.ig_limit, self.ig_goal_k)#,
+                #self.ig_ratios)
         else:
             self.colouring = self.colouring_function(G)
         return self.colouring
@@ -123,12 +143,14 @@ class ColouringRepeated(Colouring):
     
     def __init__(self, name, colouring_function, config_name,
                  order_required=False, order_function=None,
-                 preserve_capitalisation=False):
+                 preserve_capitalisation=False,
+                 ig=False, ig_initial=None, ig_limit=None,
+                 ig_goal_k=None, ig_ratios=None):
         """A class to run multiple different colourings, many times.
         
         name -- name.
-        colouring-function -- the colouring function to call.
-        Either with arguments (G) or (G, order)
+        colouring_function -- the colouring function to call.
+        Either with arguments (G) or (G, order) or (G, 
         config_name -- string used in graphs.config to specify
         which colouring should be displayed in the output.
         order_required -- True means the colouring function
@@ -137,11 +159,20 @@ class ColouringRepeated(Colouring):
         preverse_capitalisation -- True keeps capitalisation of
         name the same for all output strings, otherwise follows
         normal capitalisation rules.
+        ig -- whether the colouring is an iterated greedy.
+        Iterated Greedy arguments are in the form ig_.
+        ig_initial -- inital colouring to run for IG (either an object
+        of the class Colouring or of the class of a child of Colouring)
+        .
+        ig_limit -- limit for IG.
+        ig_goal_k -- goal_k for IG.
+        ig_ratios -- ratios for IG.
         """
         self.total_colours = 0
         self.total_time = 0
         super().__init__(name, colouring_function, config_name, order_required,
-                         order_function, preserve_capitalisation)
+                         order_function, preserve_capitalisation,
+                         ig, ig_initial, ig_limit, ig_goal_k, ig_ratios)
         
     def print_information(self, times):
         """Print information about the colouring of the graph."""
