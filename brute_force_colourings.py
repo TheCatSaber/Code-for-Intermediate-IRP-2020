@@ -3,7 +3,7 @@
 For an explanation of how these work, see
 https://github.com/TheCatSaber/Code-for-Intermediate-IRP-2020/blob/master/BruteForceExplanation.md
 """
-# Copyright (C) 2020 TheCatSaber
+# Copyright (C) 2020-21 TheCatSaber
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by

@@ -1,5 +1,5 @@
 """Iterated Greedy colouring algorithm."""
-# Copyright (C) 2020 TheCatSaber
+# Copyright (C) 2020-21 TheCatSaber
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
