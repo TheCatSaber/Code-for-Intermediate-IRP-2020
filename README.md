@@ -49,7 +49,7 @@ Valid: any float. If value <= 0, there will be no edges, and if >= 1, the graph 
 
 colouringToShow (default: None) - defines which colouring to show.
 None is no colouring, others are the colouring of the same name.
-Valid: None, randomGreedy, degreeGreedy, DSatur, productBruteForce, customBruteForce.
+Valid: None, randomGreedy, degreeGreedy, DSatur, productBruteForce, customBruteForce, iteratedGreedy.
 
 showLabels (default: True) - whether to show the labels on the output graph. Must be a boolean.
 
@@ -62,6 +62,23 @@ runBruteForce (default: True) - whether to run the brute force algorithms
 timesToRun (default: 1) - If 1, run the run_once() function
 (runs once and output includes a picture), if > 1,
 run each colouring that number of times, but no picture output. Must be an integer > 0.
+
+IGInital (default: "degree_greedy") - the initial colouring to use for iterated greedy.
+Invalid will default to degree_greedy
+Valid: degree_greedy, random_greedy, dsatur
+
+IGLimit (default: 100) - how many iterations of iterated greedy to perform without decrease
+in number of colours.
+Valid: any positive integer.
+
+IGGoalK (default: 1) - goal for how many colours to achieve in iterated greedy.
+Iterated greedy will automatically stop once achieved.
+Valid: any positive integer.
+
+ig_ratios (default: 50,30,50,0,0,0) - Ratios for functions for iterated greedy.
+In order: reverse group, random group, largest first group, smallest first group,
+increasing total degree, decreasing total degree.
+Valid: comma separated values of 6 positive integers (no spaces).
 
 # License
 
