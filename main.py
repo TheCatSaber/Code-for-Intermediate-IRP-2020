@@ -78,7 +78,14 @@ def run_once():
         "DSatur", dsatur_colouring, "DSatur",
         preserve_capitalisation=True)
     
-    ig_initial = degree_greedy
+    if IG_INITAL == "degree_greedy":
+        ig_initial = degree_greedy
+    elif IG_INITAL == "random_greedy":
+        ig_initial = random_greedy
+    elif IG_INITAL == "dsatur":
+        ig_initial = dsatur
+    else:
+        ig_initial = degree_greedy
     
     iterated_greedy = colouring_class.Colouring(
         "Iterated greedy", iterated_greedy_colouring, "iteratedGreedy",
@@ -194,55 +201,21 @@ def run_many_times():
 
 if __name__ == "__main__":
     # graphs.config imports
-    # Default values
-    GRAPH_SIZE = 6
-    RANDOM_GRAPH_EDGE_NUMBER = 2
-    ERDOS_RENYI_P = 0.5
-    COLOURING_TO_SHOW = None
-    SHOW_LABELS = True
-    USE_ERDOS_RENYI = True
-    RUN_BRUTE_FORCE = True
-    TIMES_TO_RUN = 1
-    IG_INITAL = "degree_greedy"
-    IG_LIMIT = 100
-    IG_GOAL_K = 1
-    IG_RATIOS = {
-        "reverse": 50,
-        "random": 30,
-        "largest": 50,
-        "smallest": 0,
-        "increasing": 0,
-        "decreasing": 0
-    }
-    
     # Perform import.
-    (
-        GRAPH_SIZE,
-        RANDOM_GRAPH_EDGE_NUMBER,
-        ERDOS_RENYI_P,
-        COLOURING_TO_SHOW,
-        SHOW_LABELS,
-        USE_ERDOS_RENYI,
-        RUN_BRUTE_FORCE,
-        TIMES_TO_RUN,
-        IG_INITAL,
-        IG_LIMIT,
-        IG_GOAL_K,
-        IG_RATIOS,
-    ) = config_imports(
-        GRAPH_SIZE,
-        RANDOM_GRAPH_EDGE_NUMBER,
-        ERDOS_RENYI_P,
-        COLOURING_TO_SHOW,
-        SHOW_LABELS,
-        USE_ERDOS_RENYI,
-        RUN_BRUTE_FORCE,
-        TIMES_TO_RUN,
-        IG_INITAL,
-        IG_LIMIT,
-        IG_GOAL_K,
-        IG_RATIOS,
-    )
+    Config = config_imports()
+    # Adapt old and new config (temporary)
+    GRAPH_SIZE = Config.config_values["graphSize"]
+    RANDOM_GRAPH_EDGE_NUMBER = Config.config_values["randomGraphEdgeNumber"]
+    ERDOS_RENYI_P = Config.config_values["erdosRenyiP"]
+    COLOURING_TO_SHOW = Config.config_values["colouringToShow"]
+    SHOW_LABELS = Config.config_values["showLabels"]
+    USE_ERDOS_RENYI = Config.config_values["useErdosRenyi"]
+    RUN_BRUTE_FORCE = Config.config_values["runBruteForce"]
+    TIMES_TO_RUN = Config.config_values["timesToRun"]
+    IG_INITAL = Config.config_values["IGInitial"]
+    IG_LIMIT = Config.config_values["IGLimit"]
+    IG_GOAL_K = Config.config_values["IGGoalK"]
+    IG_RATIOS = Config.config_values["IGRatios"]
         
     if TIMES_TO_RUN == 1:
         run_once()
